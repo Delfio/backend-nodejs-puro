@@ -1,29 +1,45 @@
 const Database = require('../../database');
+const createUserService = require('../../services/CreateUserService');
+const allUsersServide = require('../../services/FindAllUsers');
+
+const AppError = require('../../AppError/CreateError');
 
 class UserController {
     constructor() {
         this.database = Database;
     }
     async get(req) {
-        const allUser = await Database('users').select('*');
-        const message = {
-            users: allUser
-        }
+        const allUsers = await allUsersServide.Executar();
         return {
             statusCode: 200,
-            message: JSON.stringify(message)
+            message: JSON.stringify(allUsers)
         }
     }
 
-    async post(nome, idade, sexo) {
-        const query = `INSERT INTO user(name, old, sex) values(
-            '${nome}', ${idade}, '${sexo}'
-        )`
-        
-        
-        Database.select(query, (err, res) => {
-            console.log(err, res)
-        })
+    async create(req) {
+        const {name, bio, email, whatsapp} = req.body;
+        const id = await createUserService.Executar({
+            name,
+            bio,
+            email,
+            whatsapp
+        });
+
+        const user = {
+            id,
+            name,
+            bio,
+            email,
+            whatsapp
+        };
+
+        console.log(user);
+
+
+        return {
+            statusCode: 200,
+            message: JSON.stringify({ok: true})
+        }
     }
 }
 

@@ -1,7 +1,6 @@
 const Database = require('../database');
 const createError = require('../AppError/CreateError');
 
-
 class CreateUserService {
     async Executar({name, whatsapp, bio, email }) {
         const userExists = await Database('users')
@@ -10,17 +9,14 @@ class CreateUserService {
             .first()
 
         if (userExists) {
-            const newError = new createError({
+            throw new createError({
                 message: 'E-mail já cadastrado',
                 statusCode: 400,
             });
-
-            throw newError;
         }
 
         const novoUsuario = {
             name,
-            avatar,
             whatsapp,
             bio,
             email
@@ -29,6 +25,7 @@ class CreateUserService {
         const [id] = await Database('users').insert(novoUsuario);
 
         return id;
+
     }
 }
 
