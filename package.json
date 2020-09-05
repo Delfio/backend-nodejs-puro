@@ -1,8 +1,14 @@
 {
-  "name": "backend-lista-de-contatos",
+  "name": "backend-nodejs-puro",
   "version": "1.0.0",
   "main": "src/index.js",
   "license": "MIT",
+  "author": {
+    "email": "delfio_eu@hotmail.com",
+    "name": "Delfio Francisco",
+    "url": "https://github.com/Delfio"
+  },
+  "description": "Backend web nodejs puro",
   "scripts": {
     "dev": "nodemon .",
     "up": "knex migrate:latest",
