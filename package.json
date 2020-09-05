@@ -1,0 +1,18 @@
+{
+  "name": "backend-lista-de-contatos",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon .",
+    "up": "knex migrate:latest",
+    "down": "knex migrate:rollback"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "knex": "^0.21.5",
+    "pg": "^8.3.3"
+  }
+}
