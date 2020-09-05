@@ -6,22 +6,27 @@ class FindAllUsersService {
         const allUsers = await Database('users').select('*');
 
         const ids = allUsers.map(elemento => elemento.id);
-
-        const allAvatar = await Database('user_avatar')
+        
+        if(ids.length > 0) {
+            const allAvatar = await Database('user_avatar')
             .select('*')
             .whereIn(ids);
 
-        const UserWithAvatar = allUsers.map(elemento => {
-            const avatarOfUser = allAvatar.find(avatarFile => avatarFile.user_id === elemento.user_id);
+            const UserWithAvatar = allUsers.map(elemento => {
+                const avatarOfUser = allAvatar.find(avatarFile => avatarFile.user_id === elemento.user_id);
 
-            return {
-                ...elemento,
-                avatar: avatarOfUser
-            }
-        });
+                return {
+                    ...elemento,
+                    avatar: avatarOfUser
+                }
+            });
 
+            return UserWithAvatar;
 
-        return UserWithAvatar;
+        }
+
+        return {users:[]};
+        
     }
 }
 

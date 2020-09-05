@@ -3,7 +3,7 @@ const createError = require('../AppError/CreateError');
 
 
 class CreateUserService {
-    async Executar({name, avatar, whatsapp, bio, email }) {
+    async Executar({name, whatsapp, bio, email }) {
         const userExists = await Database('users')
             .select('id')
             .where('email', '=', email)
@@ -26,7 +26,7 @@ class CreateUserService {
             email
         };
 
-        const id = await Database('users').insert(novoUsuario);
+        const [id] = await Database('users').insert(novoUsuario);
 
         return id;
     }

@@ -1,6 +1,8 @@
 class CreateError {
     constructor({message, statusCode = 400}) {
-        this.messa = message;
+        this.message = {
+            "error": message
+        };
         this.statusCode = statusCode;
     }
 }
