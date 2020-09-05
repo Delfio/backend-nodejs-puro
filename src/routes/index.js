@@ -45,22 +45,38 @@ const GetRoutes = async (req, res) => {
 
 const PostRoutes = async (req, res) => {
     const rotaExists = rotasPost[req.url];
+    try {
+        
+        if(rotaExists) {
+            const { statusCode, message } = await rotaExists(req);
+            res.statusCode = statusCode || 200;
+            res.write(message);
+            res.end();
+            return;
+        }
 
-    if(rotaExists) {
-        const { statusCode, message } = await rotaExists(req);
-        res.statusCode = statusCode || 200;
-        res.write(message);
+        res.statusCode = 404;
+        const feedBackError = {
+            error: `${req.url} not found`
+        }
+        res.write(JSON.stringify(feedBackError));
         res.end();
         return;
+    } catch(err) {
+        if (err instanceof CreateError) {
+            res.statusCode = err.statusCode;
+            res.write(JSON.stringify(err.message));
+            res.end()
+        } else {
+            const InterNalSeverError = {
+                "error": "Internal Server error!"
+            }
+            res.statusCode = 500;
+            res.write(JSON.stringify(InterNalSeverError))
+            res.end()
+            console.log(err)
+        }
     }
-
-    res.statusCode = 404;
-    const feedBackError = {
-        error: `${req.url} not found`
-    }
-    res.write(JSON.stringify(feedBackError));
-    res.end();
-    return;
 }
 
 
