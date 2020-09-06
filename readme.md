@@ -1,8 +1,9 @@
-<h1 style="display: flex; align-items: center;justify-content: space-around;">
-<img src="https://nodejs.org/static/images/logo.svg" width="150"/>
-    Servidor NodeJS
-</h1> 
-
+<div style="background-color: #333">
+    <h1 style="display: flex; align-items: center;justify-content: space-around;">
+    <img src="https://nodejs.org/static/images/logo.svg" width="150"/>
+        Servidor NodeJS
+    </h1> 
+</div>
 ## Features
 * Cadastro de usuários
 * Upload de avatar
