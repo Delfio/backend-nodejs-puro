@@ -1,9 +1,7 @@
-<div style="background-color: #333">
-    <h1 style="display: flex; align-items: center;justify-content: space-around;">
-    <img src="https://nodejs.org/static/images/logo.svg" width="150"/>
-        Servidor NodeJS
-    </h1> 
-</div>
+<h1 style="display: flex; align-items: center;justify-content: space-around;">
+<img src="https://walde.co/wp-content/uploads/2016/09/nodejs_logo.png" width="150"/>
+    Servidor NodeJS
+</h1> 
 ## Features
 * Cadastro de usuários
 * Upload de avatar
