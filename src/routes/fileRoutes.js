@@ -1,5 +1,4 @@
-const formidable = require('formidable');
-const fs = require('fs')
+const CreateError = require('../AppError/CreateError');
 
 const AvatarController = require('../controllers/Avatar.controller');
 
@@ -20,7 +19,26 @@ async function fileRoutes(req, res) {
 
     req.user_id = id;
 
-    rotaExists(req);
+    try {
+        const { message, statusCode } = await rotaExists(req);
+        res.statusCode = statusCode || 201
+        res.write(message);
+        res.end();
+    } catch(err) {
+        if (err instanceof CreateError) {
+            res.statusCode = err.statusCode;
+            res.write(JSON.stringify(err.message));
+            res.end()
+        } else {
+            const InterNalSeverError = {
+                "error": "Internal Server error!"
+            }
+            res.statusCode = 500;
+            res.write(JSON.stringify(InterNalSeverError))
+            res.end()
+            console.log(err)
+        }
+    }
     
 
 } 

@@ -13,13 +13,19 @@ class FindAllUsersService {
             .whereIn('user_avatar.user_id', ids);
 
             const UserWithAvatar = allUsers.map(elemento => {
-                const avatarOfUser = allAvatar.find(avatarFile => avatarFile.user_id === elemento.user_id);
+                const avatarOfUser = allAvatar.find(avatarFile => {
+                    return avatarFile.user_id === elemento.id
+                });                
 
                 return {
                     ...elemento,
-                    avatar: avatarOfUser || null
+                    avatar: avatarOfUser ? {
+                        id: avatarOfUser.id,
+                        path: avatarOfUser.path
+                    }: null
                 }
             });
+
 
             return UserWithAvatar;
 
