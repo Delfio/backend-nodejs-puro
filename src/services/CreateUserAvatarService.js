@@ -1,0 +1,3 @@
+class CreateUserAvatarService {
+    async Executar(){}
+}

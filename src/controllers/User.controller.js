@@ -1,13 +1,10 @@
-const Database = require('../../database');
-const createUserService = require('../../services/CreateUserService');
-const allUsersServide = require('../../services/FindAllUsers');
+const createUserService = require('../services/CreateUserService');
+const allUsersServide = require('../services/FindAllUsers');
 
-const AppError = require('../../AppError/CreateError');
+const AppError = require('../AppError/CreateError');
 
 class UserController {
-    constructor() {
-        this.database = Database;
-    }
+
     async get(req) {
         const allUsers = await allUsersServide.Executar();
         return {
